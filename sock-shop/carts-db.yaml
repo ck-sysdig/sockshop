@@ -36,8 +36,8 @@ spec:
             - CHOWN
             - SETGID
             - SETUID
-          readOnlyRootFilesystem: true
-          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          allowPrivilegeEscalation: true
         volumeMounts:
         - mountPath: /tmp
           name: tmp-volume
