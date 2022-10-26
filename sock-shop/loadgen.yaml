@@ -1,0 +1,36 @@
+apiVersion: apps/v1 # Deployment - load-gen
+kind: Deployment
+metadata:
+  name: load-gen
+  labels:
+    name: load-gen
+  namespace: sock-shop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: load-gen
+  template:
+    metadata:
+      labels:
+        name: load-gen
+    spec:
+      containers:
+      - name: load-gen
+        image: weaveworksdemos/load-test
+        args:
+        - "-d"
+        - "60" # Wait time
+        - "-h"
+        - "front-end"
+        - "-c"
+        - "1" # Number of clients
+        - "-r"
+        - "1000000" # Number of requests
+        resources:
+          limits:
+            cpu: 300m
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 50Mi
